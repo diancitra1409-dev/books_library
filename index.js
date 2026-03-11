@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require ('express')
 const connection = require ('./config/connection')
 const app = express()
-const port = process.env.PORT
+const port = process.env.PORT || 5000
 const routes = require('./controller/index')
 const errorHandler = require('./middlewares/errorHandler')
 const authentication = require('./middlewares/auth')
