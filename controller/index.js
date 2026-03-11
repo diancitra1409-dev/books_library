@@ -1,14 +1,16 @@
 const express = require ('express')
 const router = express.Router()
-const book = require('../models/books')
 
+const Book = require('../models/books')
+const userRouter = require('./userController')
 
+// route user
 
 
 // READ ALL
 router.get('/', async (req, res, next) => {
   try {
-    const books = await book.find();
+    const books = await Book.find();
     res.status(200).json(books);
   } catch (error) {
     next(error);
@@ -18,7 +20,7 @@ router.get('/', async (req, res, next) => {
 // READ BY ID
 router.get('/:id', async (req, res, next) => {
   try {
-    const book = await book.findById(req.params.id);
+    const book = await Book.findById(req.params.id);
 
     if (!book) {
       return res.status(404).json({ message: 'Book not found' });
@@ -37,7 +39,7 @@ router.post('/', async (req, res, next) => {
 
     harga = Number(harga);
 
-    const newBook = await book.create({
+    const newBook = await Book.create({
       nama,
       penulis,
       harga,
@@ -57,7 +59,7 @@ router.put('/:id', async (req, res, next) => {
 
     harga = Number(harga);
 
-    const updatedBook = await book.findByIdAndUpdate(
+    const updatedBook = await Book.findByIdAndUpdate(
       req.params.id,
       { nama, penulis, harga, deskripsi },
       { new: true }
@@ -76,7 +78,7 @@ router.put('/:id', async (req, res, next) => {
 // DELETE
 router.delete('/:id', async (req, res, next) => {
   try {
-    const deletedBook = await book.findByIdAndDelete(req.params.id);
+    const deletedBook = await Book.findByIdAndDelete(req.params.id);
 
     if (!deletedBook) {
       return res.status(404).json({ message: 'Book not found' });
