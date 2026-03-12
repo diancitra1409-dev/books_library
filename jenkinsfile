@@ -3,7 +3,7 @@ pipeline {
 
     environment { -
     }
-
+//UGUIFUFU6
     stages {
 
         stage('Clone Repo') {
