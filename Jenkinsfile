@@ -1,15 +1,11 @@
 pipeline {
     agent any
 
-    environment { -
-    }
-//UGUIFUFU6
     stages {
 
         stage('Clone Repo') {
             steps {
-                git url: 'https://github.com/diancitra1409-dev/books_library',
-                    branch: 'main'
+                git url: 'https://github.com/diancitra1409-dev/books_library.git', branch: 'main'
             }
         }
 
