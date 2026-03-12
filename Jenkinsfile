@@ -13,9 +13,8 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'env-file', variable: 'ENVFILE')]) {
                     bat '''
-                    rm -f .env
-                    cp "$ENVFILE" .env
-                    chmod 600 .env
+                    if exist .env del .env
+                    copy "%ENVFILE%" .env
                     '''
                 }
             }
@@ -30,7 +29,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 bat '''
-                docker compose down || true
+                docker compose down
                 docker compose up -d --build
                 docker ps
                 '''
